@@ -1,0 +1,17 @@
+ADMINISTRATOR
+- localhost/NAMAFOLDER/login/admin
+Atau
+- namadomain.com/login/admin
+
+Username: admin
+Password: admin
+
+
+
+PENGGUNA / KONSUMEN
+- localhost/NAMAFOLDER/login
+Atau
+- namadomain.com/login
+
+Email: member@gmail.com
+Password: member
