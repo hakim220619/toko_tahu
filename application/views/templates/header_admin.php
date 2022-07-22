@@ -1,5 +1,6 @@
 <?php
 $setting = $this->db->get('settings')->row_array();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,6 +77,7 @@ $setting = $this->db->get('settings')->row_array();
 
 <body id="page-top">
   <?php
+  $admin = $this->db->get('admin')->row_array();
   $setting = $this->db->get('settings')->row_array();
   $dateNow = date('Y-m-d H:i');
   $dateDB = $setting['promo_time'];
@@ -150,10 +152,11 @@ $setting = $this->db->get('settings')->row_array();
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/testimonials">
-          <i class="fas fa-fw fa-comments"></i>
-          <span>Testimoni</span></a>
+        <a class="nav-link" href="<?= base_url(); ?>administrator/laporan_transaksi">
+          <i class="fas fa-fw fa-tag"></i>
+          <span>Laporan</span></a>
       </li>
+
 
       <li class="nav-item">
         <a class="nav-link" href="<?= base_url(); ?>administrator/pages">
@@ -214,7 +217,7 @@ $setting = $this->db->get('settings')->row_array();
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Login sebagai Admin</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Logout</span>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
