@@ -24,6 +24,23 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="logoutModalpenjual" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelpenjual" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabelpenjual">Yakin ingin keluar</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Pilih "Keluar" di bawah ini jika Anda siap untuk mengakhiri sesi Anda saat ini.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" href="<?= base_url(); ?>home/logout_penjual">Keluar</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>

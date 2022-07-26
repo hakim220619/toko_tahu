@@ -17,14 +17,15 @@ class Administrator extends CI_Controller
         $this->load->model('Order_model');
         $this->load->model('Laporan_model');
 
-        if (!$this->session->userdata('admin')) {
+        if (!$this->session->userdata('username')) {
+
             $cookie = get_cookie('djehbicd');
             if ($cookie == NULL) {
                 redirect(base_url());
             } else {
                 $getCookie = $this->db->get_where('admin', ['cookie' => $cookie])->row_array();
                 if ($getCookie) {
-                    $this->session->set_userdata('admin', true);
+                    $this->session->set_userdata('username', true);
                 } else {
                     redirect(base_url());
                 }
@@ -35,6 +36,9 @@ class Administrator extends CI_Controller
     public function index()
     {
         $data['title'] = 'Dashboard - Admin Panel';
+        // $ro = $this->session->userdata('role_id');
+        // var_dump($ro);
+        // die;
         $this->load->view('templates/header_admin', $data);
         $this->load->view('administrator/index');
         $this->load->view('templates/footer_admin');

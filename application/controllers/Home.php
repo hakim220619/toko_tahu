@@ -98,35 +98,121 @@ class Home extends CI_Controller
 		}
 	}
 
+	// public function login()
+	// {
+
+	// 	$this->form_validation->set_rules('username', 'username', 'required', ['required' => 'username wajib diisi']);
+	// 	if ($this->form_validation->run() == false) {
+	// 		$this->load->view('login');
+	// 	} else {
+	// 		$username = $this->input->post('username');
+	// 		$password = $this->input->post('password');
+	// 		$admin = $this->db->get_where('admin', ['username' => $username])->row_array();
+
+	// 		if ($admin) {
+	// 			if (password_verify($password, $admin['password'])) {
+	// 				// var_dump($username);
+	// 				// die;
+
+	// 				$this->session->set_userdata('admin', $admin['username']);
+
+	// 				redirect(base_url() . 'administrator');
+	// 			} else {
+	// 				$this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
+	//                           Password salah!
+	//                         </div>');
+	// 				redirect(base_url() . 'login/admin');
+	// 			}
+	// 		} else {
+	// 			$this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
+	//             Username salah!
+	//           </div>');
+	// 			redirect(base_url() . 'login/admin');
+	// 		}
+	// 	}
+	// }
+	public function login_penjual()
+	{
+		$this->form_validation->set_rules('username', 'username', 'required', ['required' => 'username wajib diisi']);
+		if ($this->form_validation->run() == false) {
+			$this->load->view('login_penjual');
+		} else {
+			$username = $this->input->post('username');
+			$password = $this->input->post('password');
+			$user = $this->db->get_where('admin', ['username' => $username])->row_array();
+
+			if ($user) {
+
+				if ($user['is_active'] == 1) {
+					//cek password
+					if (password_verify($password, $user['password'])) {
+						$data = [
+							'username' => $user['username'],
+							'role_id' => $user['role_id']
+						];
+						$this->session->set_userdata($data);
+						if ($user['role_id'] == 1) {
+							redirect(base_url() . 'administrator');
+						} else {
+							redirect(base_url() . 'administrator');
+						}
+					} else {
+						$this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
+	                        Password salah!
+	                       </div>');
+						redirect(base_url() . 'login/admin');
+					}
+				} else {
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username Tidak Aktiv</div>');
+					redirect(base_url() . 'login/admin');
+				}
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+			Username tidak terdaftar !
+		  </div>');
+				redirect(base_url() . 'login/admin');
+			}
+		}
+	}
 	public function login()
 	{
-
 		$this->form_validation->set_rules('username', 'username', 'required', ['required' => 'username wajib diisi']);
 		if ($this->form_validation->run() == false) {
 			$this->load->view('login');
 		} else {
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
-			$admin = $this->db->get_where('admin', ['username' => $username])->row_array();
+			$user = $this->db->get_where('admin', ['username' => $username])->row_array();
 
-			if ($admin) {
-				if (password_verify($password, $admin['password'])) {
-					// var_dump($admin);
-					// die;
+			if ($user) {
 
-					$this->session->set_userdata('admin', $admin['username']);
-
-					redirect(base_url() . 'administrator');
+				if ($user['is_active'] == 1) {
+					//cek password
+					if (password_verify($password, $user['password'])) {
+						$data = [
+							'username' => $user['username'],
+							'role_id' => $user['role_id']
+						];
+						$this->session->set_userdata($data);
+						if ($user['role_id'] == 1) {
+							redirect(base_url() . 'administrator');
+						} else {
+							redirect(base_url() . 'administrator');
+						}
+					} else {
+						$this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
+	                        Password salah!
+	                       </div>');
+						redirect(base_url() . 'login/admin');
+					}
 				} else {
-					$this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
-                              Password salah!
-                            </div>');
+					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username Tidak Aktiv</div>');
 					redirect(base_url() . 'login/admin');
 				}
 			} else {
-				$this->session->set_flashdata('failed', '<div class="alert alert-danger" role="alert">
-                Username salah!
-              </div>');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+			Username tidak terdaftar !
+		  </div>');
 				redirect(base_url() . 'login/admin');
 			}
 		}
@@ -139,6 +225,14 @@ class Home extends CI_Controller
 		delete_cookie('e382jxndj');
 		redirect(base_url() . 'login');
 	}
+	public function logout_penjual()
+	{
+		$sess = ['login', 'id'];
+		$this->session->unset_userdata($sess);
+		delete_cookie('e382jxndj');
+		redirect(base_url() . 'home/login_penjual');
+	}
+
 
 	public function verify_web_authentication()
 	{

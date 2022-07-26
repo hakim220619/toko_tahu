@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $route['default_controller'] = 'home';
 $route['404_override'] = 'home/notfound';
@@ -8,6 +8,8 @@ $route['404'] = 'home/notfound';
 $route['subscribe-email'] = 'home/subscribe_email';
 $route['unsubscribe-email'] = 'home/unsubscribe_email';
 $route['login/admin'] = 'home/login';
+$route['login/penjual'] = 'home/login_penjual';
+
 $route['snap'] = 'snap';
 $route['transaction'] = 'transaction';
 $route['notification'] = 'notification';
@@ -20,6 +22,7 @@ $route['testimoni'] = 'testimoni/index';
 $route['cart'] = 'cart/index';
 $route['payment'] = 'payment/index';
 $route['register'] = 'auth/register';
+
 $route['login'] = 'auth/login';
 $route['logout'] = 'home/logout';
 $route['profile'] = 'profile';

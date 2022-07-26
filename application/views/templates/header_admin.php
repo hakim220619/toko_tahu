@@ -101,75 +101,103 @@ $setting = $this->db->get('settings')->row_array();
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0" />
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider" />
-
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/users">
-          <i class="fas fa-fw fa-users"></i>
-          <span>Pengguna</span></a>
-      </li>
-
-      <?php $this->db->where('status', 0);
-      $this->db->or_where('status', 1);
-      $orders = $this->db->get('invoice'); ?>
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/orders">
-          <i class="fas fa-fw fa-shopping-cart"></i>
-          <span>Pesanan</span> <small class="badge badge-warning"><?= $orders->num_rows() ?> new</small></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/email">
-          <i class="fas fa-fw fa-envelope"></i>
-          <span>Kirim Email</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/categories">
-          <i class="fas fa-fw fa-tag"></i>
-          <span>Kategori</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/products">
-          <i class="fas fa-fw fa-box-open"></i>
-          <span>Produk</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/promo">
-          <i class="fas fa-fw fa-fire"></i>
-          <span>Promo</span></a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/laporan_transaksi">
-          <i class="fas fa-fw fa-tag"></i>
-          <span>Laporan</span></a>
-      </li>
+      <?php if ($this->session->userdata('role_id') == 1) { ?>
 
 
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/pages">
-          <i class="fas fa-fw fa-file"></i>
-          <span>Halaman</span></a>
-      </li>
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url(); ?>administrator/settings">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Pengaturan</span></a>
-      </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
 
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator/users">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Pengguna</span></a>
+        </li>
+
+        <?php $this->db->where('status', 0);
+        $this->db->or_where('status', 1);
+        $orders = $this->db->get('invoice'); ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator/orders">
+            <i class="fas fa-fw fa-shopping-cart"></i>
+            <span>Pesanan</span> <small class="badge badge-warning"><?= $orders->num_rows() ?> new</small></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator/email">
+            <i class="fas fa-fw fa-envelope"></i>
+            <span>Kirim Email</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator/categories">
+            <i class="fas fa-fw fa-tag"></i>
+            <span>Kategori</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator/products">
+            <i class="fas fa-fw fa-box-open"></i>
+            <span>Produk</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator/promo">
+            <i class="fas fa-fw fa-fire"></i>
+            <span>Promo</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator/laporan_transaksi">
+            <i class="fas fa-fw fa-tag"></i>
+            <span>Laporan</span></a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator/pages">
+            <i class="fas fa-fw fa-file"></i>
+            <span>Halaman</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator/settings">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Pengaturan</span></a>
+        </li>
+
+      <?php } elseif ($this->session->userdata('role_id') == 2) { ?>
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider" />
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator/products">
+            <i class="fas fa-fw fa-box-open"></i>
+            <span>Produk</span></a>
+        </li>
+
+
+        <?php $this->db->where('status', 0);
+        $this->db->or_where('status', 1);
+        $orders = $this->db->get('invoice'); ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url(); ?>administrator/orders">
+            <i class="fas fa-fw fa-shopping-cart"></i>
+            <span>Pesanan</span> <small class="badge badge-warning"><?= $orders->num_rows() ?> new</small></a>
+        </li>
+      <?php } ?>
       <br />
 
       <!-- Divider -->
@@ -217,7 +245,7 @@ $setting = $this->db->get('settings')->row_array();
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Logout</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Logout </span>
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -225,10 +253,17 @@ $setting = $this->db->get('settings')->row_array();
                   <i class="fas fa-user-edit fa-sm fa-fw mr-2 text-gray-400"></i>
                   Edit Profil
                 </a>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
+                <?php if ($this->session->userdata('role_id') == 1) { ?>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                  </a>
+                <?php } elseif ($this->session->userdata('role_id') == 2) { ?>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModalpenjual">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                  </a>
+                <?php } ?>
               </div>
             </li>
           </ul>
