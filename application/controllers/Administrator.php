@@ -1672,4 +1672,4 @@ class Administrator extends CI_Controller
         delete_cookie('djehbicd');
         redirect(base_url() . 'login/admin');
     }
-
+}

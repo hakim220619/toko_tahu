@@ -29,13 +29,13 @@
                     <h2 class="title">Alamat Pengiriman</h2>
                     <hr>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6" hidden>
                             <div class="form-group">
                                 <label for="label">Alamat Sebagai</label>
                                 <input type="text" id="label" value="<?= $data_diri->alamat_sebagai ?>" autocomplete="off" class="form-control" placeholder="Contoh: Rumah, Kantor, Kos, dll" required name="label">
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6" hidden>
                             <div class="form-group">
                                 <label for="name">Nama Penerima</label>
                                 <input type="text" id="name" value="<?= $data_diri->name ?>" autocomplete="off" class="form-control" required name="name">
@@ -43,14 +43,14 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6" hidden>
                             <div class="form-group">
                                 <label for="telp">Nomor Telepon</label>
                                 <input type="number" id="telp" value="<?= $data_diri->no_tlp ?>" autocomplete="off" class="form-control" required name="telp">
                                 <small class="text-muted">Contoh: 081234567890</small>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6" hidden>
                             <div class="form-group">
                                 <label for="zipcode">Kode Pos</label>
                                 <input type="number" id="zipcode" value="<?= $data_diri->kode_pos ?>" autocomplete="off" class="form-control" required name="zipcode">
@@ -73,29 +73,29 @@
                             <div class="form-group">
                                 <label for="paymentSelectRegencies">Kabupaten/Kota</label>
                                 <select name="paymentSelectRegencies" id="paymentSelectRegencies" class="form-control" required>
-                                    <option value="<?= $data_diri->regency; ?>"><?= $data_diri->regency; ?></option>
+                                    <option></option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class=" row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6" hidden>
                             <div class="form-group">
                                 <label for="district">Kecamatan</label>
-                                <input type="text" class="form-control" value="<?= $data_diri->district; ?>" autocomplete="off" id="district" name="district" required>
+                                <input type="text" class="form-control" value="<?= $data_diri->nama_kec; ?>" autocomplete="off" id="district" name="district" required>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6" hidden>
                             <div class="form-group">
                                 <label for="village">Desa/Kelurahan</label>
-                                <input type="text" class="form-control" value="<?= $data_diri->village; ?>" autocomplete="off" id="village" name="village" required>
+                                <input type="text" class="form-control" value="<?= $data_diri->nama_des; ?>" autocomplete="off" id="village" name="village" required>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col" hidden>
                             <label for="address">Alamat</label>
-                            <textarea name="address" id="address" class="form-control" placeholder="Isi dengan nama jalan, nomor rumah, nama gedung, dsb" required></textarea>
+                            <textarea name="address" id="address" class="form-control" placeholder="Isi dengan nama jalan, nomor rumah, nama gedung, dsb" required><?= $data_diri->alamat; ?></textarea>
                         </div>
                     </div>
                 </div>

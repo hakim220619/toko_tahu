@@ -188,7 +188,13 @@ class Payment_model extends CI_Model
     public function getdatadiri($id)
     {
         $query = $this->db->query("
-		select * from user where id = " . $id . " 
+		select u.*, k.id as id_kec, k.nama as nama_kec, k.id_kabupaten, d.id as id_des, d.nama as nama_des, d.id_kecamatan
+        from user u
+        left join kecamatan k
+        on u.district=k.id
+        left join desa d
+        on u.village=d.id
+        where u.id = " . $id . " 
 		");
         return $query;
     }
