@@ -32,13 +32,13 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="label">Alamat Sebagai</label>
-                                <input type="text" id="label" autocomplete="off" class="form-control" placeholder="Contoh: Rumah, Kantor, Kos, dll" required name="label">
+                                <input type="text" id="label" value="<?= $data_diri->alamat_sebagai ?>" autocomplete="off" class="form-control" placeholder="Contoh: Rumah, Kantor, Kos, dll" required name="label">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="name">Nama Penerima</label>
-                                <input type="text" id="name" autocomplete="off" class="form-control" required name="name">
+                                <input type="text" id="name" value="<?= $data_diri->name ?>" autocomplete="off" class="form-control" required name="name">
                             </div>
                         </div>
                     </div>
@@ -46,14 +46,14 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="telp">Nomor Telepon</label>
-                                <input type="number" id="telp" autocomplete="off" class="form-control" required name="telp">
+                                <input type="number" id="telp" value="<?= $data_diri->no_tlp ?>" autocomplete="off" class="form-control" required name="telp">
                                 <small class="text-muted">Contoh: 081234567890</small>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="zipcode">Kode Pos</label>
-                                <input type="number" id="zipcode" autocomplete="off" class="form-control" required name="zipcode">
+                                <input type="number" id="zipcode" value="<?= $data_diri->kode_pos ?>" autocomplete="off" class="form-control" required name="zipcode">
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                                 <select name="paymentSelectProvinces" id="paymentSelectProvinces" class="form-control" required>
                                     <option></option>
                                     <?php foreach ($provinces as $p) : ?>
-                                        <option value="<?= $p['province_id']; ?>"><?= $p['province']; ?></option>
+                                        <option <?= ($p['province'] == $data_diri->province ? 'selected=""' : '') ?> value="<?= $p['province_id']; ?>"><?= $p['province']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -73,22 +73,22 @@
                             <div class="form-group">
                                 <label for="paymentSelectRegencies">Kabupaten/Kota</label>
                                 <select name="paymentSelectRegencies" id="paymentSelectRegencies" class="form-control" required>
-                                    <option></option>
+                                    <option value="<?= $data_diri->regency; ?>"><?= $data_diri->regency; ?></option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class=" row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="district">Kecamatan</label>
-                                <input type="text" class="form-control" autocomplete="off" id="district" name="district" required>
+                                <input type="text" class="form-control" value="<?= $data_diri->district; ?>" autocomplete="off" id="district" name="district" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="village">Desa/Kelurahan</label>
-                                <input type="text" class="form-control" autocomplete="off" id="village" name="village" required>
+                                <input type="text" class="form-control" value="<?= $data_diri->village; ?>" autocomplete="off" id="village" name="village" required>
                             </div>
                         </div>
                     </div>

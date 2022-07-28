@@ -9,7 +9,6 @@ $route['subscribe-email'] = 'home/subscribe_email';
 $route['unsubscribe-email'] = 'home/unsubscribe_email';
 $route['login/admin'] = 'home/login';
 $route['login/penjual'] = 'home/login_penjual';
-
 $route['snap'] = 'snap';
 $route['transaction'] = 'transaction';
 $route['notification'] = 'notification';

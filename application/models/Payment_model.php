@@ -185,4 +185,11 @@ class Payment_model extends CI_Model
 		");
         return $query;
     }
+    public function getdatadiri($id)
+    {
+        $query = $this->db->query("
+		select * from user where id = " . $id . " 
+		");
+        return $query;
+    }
 }

@@ -4,7 +4,7 @@
   </a>
   <p class="subtitle">Daftar akun baru sekarang</p>
   <?php echo $this->session->flashdata('failed'); ?>
-  <form action="<?= base_url(); ?>register" method="post">
+  <form action="<?= base_url(); ?>register" method="POST" enctype="multipart/form-data">
     <div class="address">
       <div class="row">
         <div class="col-lg-6">
@@ -34,7 +34,7 @@
         <div class="col-lg-12">
           <div class="form-group">
             <label for="label">Alamat Sebagai</label>
-            <input type="text" id="label" autocomplete="off" class="form-control" placeholder="Contoh: Rumah, Kantor, Kos, dll" required name="label">
+            <input type="text" id="alamat_sebagai" name="alamat_sebagai" autocomplete="off" class="form-control" placeholder="Contoh: Rumah, Kantor, Kos, dll">
           </div>
         </div>
       </div>
@@ -42,14 +42,14 @@
         <div class="col-lg-6">
           <div class="form-group">
             <label for="telp">Nomor Telepon</label>
-            <input type="number" id="telp" autocomplete="off" class="form-control" required name="telp">
+            <input type="number" id="telp" name="no_tlp" autocomplete="off" class="form-control" required>
             <small class="text-muted">Contoh: 081234567890</small>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="form-group">
             <label for="zipcode">Kode Pos</label>
-            <input type="number" id="zipcode" autocomplete="off" class="form-control" required name="zipcode">
+            <input type="number" id="zipcode" name="kode_pos" autocomplete="off" class="form-control" required>
           </div>
         </div>
       </div>
@@ -92,21 +92,19 @@
       </div>
       <div class="col-lg-12">
         <label for="address">Alamat</label>
-        <textarea name="address" id="address" class="form-control" placeholder="Isi dengan nama jalan, nomor rumah, nama gedung, dsb" required></textarea>
+        <textarea name="alamat" id="address" class="form-control" placeholder="Isi dengan nama jalan, nomor rumah, nama gedung, dsb" required></textarea>
       </div>
       <div class="row">
-
-
-
         <small class="text-muted">Saya telah membaca dan menyetujui <a href="<?= base_url(); ?>terms" target="_blank">Syarat dan Ketentuan</a> serta <a href="<?= base_url(); ?>privacy-policy" target="_blank">Kebijakan Privasi</a> <?= $this->Settings_model->general()["app_name"]; ?></small>
-        <button type="submit" class="btn btn-block btn-dark mt-3">Daftar</button>
+
         <hr>
         <p class="text-lead">Atau sudah punya akun? <a href="<?= base_url(); ?>login">Login</a> sekarang</p>
       </div>
+      <button type="submit" class="btn btn-block btn-dark mt-3">Daftar</button>
   </form>
 </div>
 
-<?php if ($this->session->flashdata('success')) { ?>
+<!-- <?php if ($this->session->flashdata('success')) { ?>
   <div class="modal fade" id="modalRegisterSuccess" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="width: 400px">
       <div class="modal-content">
@@ -121,7 +119,7 @@
       </div>
     </div>
   </div>
-<?php } ?>
+<?php } ?> -->
 <script>
   $(document).ready(function() {
     $("#propinsi").change(function() {

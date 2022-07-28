@@ -13,6 +13,7 @@ class Auth extends CI_Controller
         $this->load->model('Categories_model');
         $this->load->model('Payment_model');
         $this->load->model('Settings_model');
+        $this->load->model('User_model');
         $this->load->model('Order_model');
         $this->load->helper(array('url', 'html'));
 
@@ -43,6 +44,7 @@ class Auth extends CI_Controller
             'matches' => 'password tidak sama', 'required' => 'Password wajib diisi'
         ]);
         $this->form_validation->set_rules('password1', 'Password', 'matches[password]', ['matches' => 'password tidak sama']);
+        $this->form_validation->set_rules('alamat_sebagai', 'Sebagai Alamat', 'required|max_length[40]', ['required' => 'alamat wajib diisi', 'max_length' => 'Panjang alamat maksimal 40 karakter']);
         if ($this->form_validation->run() == false) {
             $data['title'] = 'Daftar - ' . $this->Settings_model->general()["app_name"];
             $data['css'] = 'auth';
@@ -60,6 +62,7 @@ class Auth extends CI_Controller
             redirect(base_url() . 'register');
         }
     }
+
     function add_ajax_kab($id_prov)
     {
         $query = $this->db->get_where('kabupaten', ['id_propinsi' => $id_prov]);
@@ -91,16 +94,7 @@ class Auth extends CI_Controller
         }
         echo $data;
     }
-    public function getLocation()
-    {
-        $id = $this->input->post('id');
-        $getLocation = $this->Payment_model->getCity($id);
-        $list = "<option></option>";
-        foreach ($getLocation as $d) {
-            $list .= "<option value='" . $d['city_id'] . "'>" . $d['type'] . ' ' . $d['city_name'] . "";
-        }
-        echo json_encode($list);
-    }
+
 
 
     public function login()
@@ -130,7 +124,9 @@ class Auth extends CI_Controller
                         redirect(base_url() . 'login');
                     } else {
                         $data = [
-                            'id' => $user['id']
+                            'id' => $user['id'],
+                            'username' =>
+                            $user['username'],
                         ];
                         if ($remember != NULL) {
                             $key = random_string('alnum', 64);
