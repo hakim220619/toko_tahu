@@ -1,22 +1,24 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Payment_model extends CI_Model {
+class Payment_model extends CI_Model
+{
 
-    public function getCity($id){
+    public function getCity($id)
+    {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.rajaongkir.com/starter/city?province=".$id,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "key: ". $this->Settings_model->general()["api_rajaongkir"]
-        ),
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/city?province=" . $id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "key: " . $this->Settings_model->general()["api_rajaongkir"]
+            ),
         ));
 
         $response = curl_exec($curl);
@@ -32,20 +34,21 @@ class Payment_model extends CI_Model {
         }
     }
 
-    public function getProvinces(){
+    public function getProvinces()
+    {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "key: ". $this->Settings_model->general()["api_rajaongkir"]
-        ),
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/province",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "key: " . $this->Settings_model->general()["api_rajaongkir"]
+            ),
         ));
 
         $response = curl_exec($curl);
@@ -61,7 +64,8 @@ class Payment_model extends CI_Model {
         }
     }
 
-    public function getService($kurir){
+    public function getService($kurir)
+    {
         $dbSetting = $this->db->get('settings')->row_array();
         $origin = $dbSetting['regency_id'];
         $destination = $this->input->post('destination');
@@ -74,18 +78,18 @@ class Payment_model extends CI_Model {
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => "origin=".$origin."&destination=".$destination."&weight=".$weight."&courier=".$kurir."",
-        CURLOPT_HTTPHEADER => array(
-            "content-type: application/x-www-form-urlencoded",
-            "key: ". $this->Settings_model->general()["api_rajaongkir"]
-        ),
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "origin=" . $origin . "&destination=" . $destination . "&weight=" . $weight . "&courier=" . $kurir . "",
+            CURLOPT_HTTPHEADER => array(
+                "content-type: application/x-www-form-urlencoded",
+                "key: " . $this->Settings_model->general()["api_rajaongkir"]
+            ),
         ));
 
         $response = curl_exec($curl);
@@ -101,9 +105,10 @@ class Payment_model extends CI_Model {
         }
     }
 
-    public function succesfully(){
+    public function succesfully()
+    {
         $getuser = $this->db->get_where('user', ['id' => $this->session->userdata('id')])->row_array();
-        $invoice = $getuser['id'] .  substr(rand(),0,5) . substr(time(),7);;
+        $invoice = $getuser['id'] .  substr(rand(), 0, 5) . substr(time(), 7);;
         $label = $this->input->post('label', true);
         $name = $this->input->post('name', true);
         $email = $getuser['email'];
@@ -126,9 +131,9 @@ class Payment_model extends CI_Model {
         $totalPrice = $price;
         $totalAll = intval($ongkir) + intval($totalPrice);
 
-        if($service2 == 'cod'){
+        if ($service2 == 'cod') {
             $numOne = 1;
-        }else{
+        } else {
             $numOne = 0;
         }
 
@@ -154,7 +159,7 @@ class Payment_model extends CI_Model {
         ];
         $this->db->insert('invoice', $data);
 
-        foreach($getcart->result_array() as $c){
+        foreach ($getcart->result_array() as $c) {
             $data = [
                 'id_invoice' => $invoice,
                 'user' => $this->session->userdata('id'),
@@ -173,4 +178,11 @@ class Payment_model extends CI_Model {
         redirect(base_url() . 'profile/transaction/' . $invoice);
     }
 
+    public function provinsi()
+    {
+        $query = $this->db->query("
+		select * from propinsi 
+		");
+        return $query;
+    }
 }
